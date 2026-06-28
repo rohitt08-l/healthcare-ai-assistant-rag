@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-dotenv
+requests
+chromadb
+pydantic
+python-multipart
+pymupdf
+python-docx
+langchain_core
+langchain-ollama
+streamlit
