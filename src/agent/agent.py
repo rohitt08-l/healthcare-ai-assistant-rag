@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 ROUTER_SYSTEM_PROMPT = """
 You are a simple healthcare assistant router.
 
-Your job is to decide which tool should be used for the user query.
+Your task is to decide which tool should be used for the user query.
 
 Available tools:
 
@@ -23,15 +23,19 @@ Available tools:
 Use this when the user asks about:
 - reports
 - healthcare records
-- symptoms
-- diseases
-- medication information
+- symptoms from uploaded documents
+- diseases from uploaded documents
+- medication information from uploaded documents
 - medical document search
 - patient history
 - current user reports
 
 2. appointment_scheduler_tool
 Use this when the user asks to:
+- check appointments
+- list appointments
+- view available appointment slots
+- suggest a doctor appointment
 - schedule an appointment
 - book a doctor appointment
 - find appointment slots
@@ -42,10 +46,22 @@ JSON format:
 {
   "tool": "rag_tool" or "appointment_scheduler_tool",
   "args": {
-    "preferred_date": "YYYY-MM-DD if appointment query else empty",
-    "reason": "short reason"
+    "action": "check" or "suggest" or "book",
+    "preferred_date": "YYYY-MM-DD if mentioned else empty",
+    "reason": "short reason from user query",
+    "specialization": "doctor specialization if clearly mentioned else empty",
+    "slot_id": "appointment slot id if mentioned else empty"
   }
 }
+
+Rules:
+- If user asks only to see/list/check appointments, use action="check".
+- If user describes a health issue and asks for an appointment suggestion, use action="suggest".
+- If user asks to book/schedule an appointment, use action="book".
+- If the user mentions a slot id like APT-002, include it in slot_id.
+- If the user mentions a date, convert it to YYYY-MM-DD.
+- If no date is mentioned, keep preferred_date empty.
+- If no specialization is clearly mentioned, keep specialization empty.
 """
 
 
@@ -53,9 +69,13 @@ FINAL_ANSWER_SYSTEM_PROMPT = """
 You are a helpful healthcare assistant.
 
 Important rules:
+- Use only the provided tool result/context.
+- Do not invent doctors, appointments, medications, diagnoses, or document facts.
+- For document questions, answer only from retrieved context.
+- For appointment results, clearly show doctor name, specialization, date, time, slot id, location, and consultation type.
+- If appointment suggestions are returned, ask the user to choose a slot_id to book.
+- If an appointment is booked, clearly confirm the booking.
 - Do not claim to be a doctor.
-- Do not give dangerous medical advice.
-- For disease or medication questions, answer using retrieved context only.
 - If medical guidance is needed, recommend consulting a qualified doctor.
 - Be concise and clear.
 """
@@ -188,17 +208,18 @@ class SimpleHealthcareAgent:
         logger.info("Tool args: %s", args)
 
         if tool_name == "appointment_scheduler_tool":
+            action = args.get("action", "check")
             preferred_date = args.get("preferred_date", "")
             reason = args.get("reason", query)
-
-            logger.info(
-                "Calling appointment_scheduler_tool with preferred_date=%s",
-                preferred_date,
-            )
+            specialization = args.get("specialization", "")
+            slot_id = args.get("slot_id", "")
 
             tool_result = appointment_scheduler_tool(
+                action=action,
                 preferred_date=preferred_date,
                 reason=reason,
+                specialization=specialization,
+                slot_id=slot_id,
             )
 
         else:
