@@ -10,3 +10,4 @@ python-docx
 langchain_core
 langchain-ollama
 streamlit
+pytest
