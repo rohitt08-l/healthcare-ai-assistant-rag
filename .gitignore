@@ -1,0 +1,49 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Uploaded files
+uploaded_files/
+
+# Chroma/vector database
+chroma_db/
+vector_store/
+
+# Data folder if storing local test files
+data/
+
+# Logs
+*.log
+logs/
+
+# Python tooling/cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# OS/system files
+.DS_Store
+Thumbs.db
+
+# Docker override files
+docker-compose.override.yml
+
+# Streamlit local config/cache
+.streamlit/
