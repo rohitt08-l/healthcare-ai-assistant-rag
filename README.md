@@ -248,6 +248,6 @@ healthcare-ai-assistant-rag/
 
 ---
 
-## License
+## Demo Link
 
-This repository is educational and should be adapted for your own projects.
+https://youtu.be/8zSPiFfjYIc
