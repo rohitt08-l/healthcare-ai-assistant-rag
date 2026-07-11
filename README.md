@@ -248,6 +248,3 @@ healthcare-ai-assistant-rag/
 
 ---
 
-## Demo Link
-
-https://youtu.be/8zSPiFfjYIc
