@@ -113,7 +113,7 @@ Open:
 - Streamlit app: `http://localhost:8501`
 - FastAPI Swagger docs: `http://localhost:8000/docs`
 
----
+--
 
 ## Docker
 
@@ -139,7 +139,7 @@ The application reads settings from `.env` and environment variables via `python
 - `CHROMA_PATH`: ChromaDB storage location
 - `CHROMA_COLLECTION`: ChromaDB collection name
 
----
+--
 
 ## API Endpoints
 
@@ -183,7 +183,7 @@ JSON body:
 }
 ```
 
----
+--
 
 ## Streamlit UI
 
@@ -195,7 +195,7 @@ The Streamlit app includes:
 - Display of retrieval excerpts and appointment responses
 - Connection and error reporting
 
----
+--
 
 ## Project Structure
 
@@ -230,7 +230,7 @@ healthcare-ai-assistant-rag/
 └── data/
 ```
 
----
+--
 
 ## Notes
 
@@ -238,7 +238,7 @@ healthcare-ai-assistant-rag/
 - If embedding requests fail, verify `OLLAMA_BASE_URL` and model availability.
 - The appointment scheduler is a mock tool and not suitable for production.
 
----
+--
 
 ## Troubleshooting
 
@@ -246,5 +246,5 @@ healthcare-ai-assistant-rag/
 - `ImportError: cannot import name 'load_document'`: ensure `src/utils/doc_loader.py` exists and exports `load_document`.
 - Run `pip install -r requirements.txt` if dependencies are missing.
 
----
+--
 
