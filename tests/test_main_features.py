@@ -4,9 +4,7 @@ import os
 import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
-
 from fastapi import UploadFile
-
 from main import health
 from src.agent.agent import SimpleHealthcareAgent
 from src.agent import tools as tools_module
