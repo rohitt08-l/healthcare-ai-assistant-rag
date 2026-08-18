@@ -68,7 +68,7 @@ cd healthcare-ai-assistant-rag
 
 ```bash
 python -m venv .venv
-.\.venv\Scriptsctivate
+.\.venv\Scriptsactivate
 ```
 
 3. Install dependencies:
@@ -94,7 +94,7 @@ CHROMA_COLLECTION=healthcare_docs
 
 ---
 
-## Running Locally
+## Running Locally 
 
 Start the FastAPI application:
 
