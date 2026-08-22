@@ -10,7 +10,7 @@ This project demonstrates how to build a simple agentic workflow where a user ca
 - Ask questions over uploaded documents using RAG
 - Route appointment-related queries to a simple appointment scheduler tool
 - Use a local reasoning LLM through Ollama, such as `gpt-oss:20b`
-- Interact through API endpoints or a Streamlit UI
+- Interact through API endpoints or a Streamlit UI to test 
 
 > This project is created for learning purposes only. It should not be used for real medical diagnosis, treatment, or clinical decision-making.
 
